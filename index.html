@@ -2,9 +2,24 @@
 <html>
 <head>
     <title>Simple Mirror</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <video id="video" autoplay></video>
+    <button id="capture">Take Picture</button>
+    <div id="filters">
+        <button class="filter-btn" data-filter="none">None</button>
+        <button class="filter-btn" data-filter="brightness">Brightness</button>
+        <button class="filter-btn" data-filter="contrast">Contrast</button>
+        <button class="filter-btn" data-filter="blur">Blur</button>
+        <button class="filter-btn" data-filter="sepia">Sepia</button>
+        <button class="filter-btn" data-filter="grayscale">Grayscale</button>
+        <button class="filter-btn" data-filter="hue-rotate">Hue Rotate</button>
+        <button class="filter-btn" data-filter="saturate">Saturate</button>
+        <button class="filter-btn" data-filter="background-blur">Background Blur</button>
+    </div>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <div id="gallery"></div>
     <h1>Simple Mirror</h1>
     <p>This is a simple mirror.</p>
 </body>
