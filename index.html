@@ -5,9 +5,21 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <video id="video" autoplay></video>
-    <button id="capture">Take Picture</button>
+    <h1>Simple Mirror</h1>
+    <p>Use your camera to take pictures, record video, and save media to your files.</p>
+
+    <div class="video-wrapper">
+        <video id="video" autoplay playsinline muted></video>
+        <div class="controls">
+            <button id="capture">Take Picture</button>
+            <button id="record-start">Start Recording</button>
+            <button id="record-stop" disabled>Stop Recording</button>
+            <button id="clear-gallery">Clear Gallery</button>
+        </div>
+    </div>
+
     <div id="filters">
+        <span>Filters:</span>
         <button class="filter-btn" data-filter="none">None</button>
         <button class="filter-btn" data-filter="brightness">Brightness</button>
         <button class="filter-btn" data-filter="contrast">Contrast</button>
@@ -16,12 +28,16 @@
         <button class="filter-btn" data-filter="grayscale">Grayscale</button>
         <button class="filter-btn" data-filter="hue-rotate">Hue Rotate</button>
         <button class="filter-btn" data-filter="saturate">Saturate</button>
-        <button class="filter-btn" data-filter="background-blur">Background Blur</button>
+        <button class="filter-btn" data-filter="invert">Invert</button>
+        <button class="filter-btn" data-filter="warm">Warm</button>
+        <button class="filter-btn" data-filter="cool">Cool</button>
+        <button class="filter-btn" data-filter="vintage">Vintage</button>
     </div>
-    <canvas id="canvas" style="display:none;"></canvas>
+
+    <canvas id="canvas" hidden></canvas>
+    <div id="status"></div>
     <div id="gallery"></div>
-    <h1>Simple Mirror</h1>
-    <p>This is a simple mirror.</p>
+
+    <script src="index.js"></script>
 </body>
-<script src="index.js"></script>
 </html>
