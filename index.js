@@ -185,32 +185,6 @@ function capturePhoto() {
     }, 'image/png');
 }
 
-    const context = captureCanvas.getContext('2d');
-    // Set canvas to full video resolution for high quality capture
-    captureCanvas.width = recordingCanvas.width;
-    captureCanvas.height = recordingCanvas.height;
-    context.filter = filterMap[currentFilter] || 'none';
-    context.imageSmoothingEnabled = true;
-    context.imageSmoothingQuality = 'high'; // High quality scaling if needed
-    context.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
-
-    captureCanvas.toBlob(blob => {
-        if (!blob) {
-            status.textContent = 'Failed to capture photo.';
-            return;
-        }
-
-        const url = URL.createObjectURL(blob);
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'Captured photo';
-
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        createGalleryItem('photo', img, url, `mirror-photo-${timestamp}.png`);
-        status.textContent = 'Photo captured and ready to save.';
-    }, 'image/png');
-}
-
 function startRecording() {
     if (!currentStream) {
         status.textContent = 'Camera not ready yet.';
