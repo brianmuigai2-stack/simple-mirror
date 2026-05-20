@@ -1,43 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d1b33">
     <title>Simple Mirror</title>
     <link rel="stylesheet" href="index.css">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%95%B3%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-    <h1>Simple Mirror</h1>
-    <p>Use your camera to take pictures, record video, and save media to your files.</p>
+    <div class="container">
+        <header class="app-header">
+            <h1>&#x1F9B8; Simple Mirror</h1>
+            <p>Use your camera to take pictures, record video, and save media to your files.</p>
+        </header>
 
-    <div class="video-wrapper">
-        <video id="video" autoplay playsinline muted></video>
-        <div class="controls">
-            <button id="capture">Take Picture</button>
-            <button id="record-start">Start Recording</button>
-            <button id="record-stop" disabled>Stop Recording</button>
-            <button id="clear-gallery">Clear Gallery</button>
+        <div class="video-wrapper">
+            <div class="video-frame">
+                <video id="video" autoplay playsinline muted></video>
+                <canvas id="preview-canvas"></canvas>
+            </div>
+            <div class="controls">
+                <button id="capture">&#x1F4F8; Take Picture</button>
+                <button id="record-start">&#x23FA; Start Rec</button>
+                <button id="record-stop" disabled>&#x23F9; Stop Rec</button>
+                <button id="clear-gallery">&#x1F5D1; Clear</button>
+            </div>
         </div>
-    </div>
 
-    <div id="filters">
-        <span>Filters:</span>
-        <button class="filter-btn" data-filter="none">None</button>
-        <button class="filter-btn" data-filter="brightness">Brightness</button>
-        <button class="filter-btn" data-filter="contrast">Contrast</button>
-        <button class="filter-btn" data-filter="blur">Blur</button>
-        <button class="filter-btn" data-filter="sepia">Sepia</button>
-        <button class="filter-btn" data-filter="grayscale">Grayscale</button>
-        <button class="filter-btn" data-filter="hue-rotate">Hue Rotate</button>
-        <button class="filter-btn" data-filter="saturate">Saturate</button>
-        <button class="filter-btn" data-filter="invert">Invert</button>
-        <button class="filter-btn" data-filter="warm">Warm</button>
-        <button class="filter-btn" data-filter="cool">Cool</button>
-        <button class="filter-btn" data-filter="vintage">Vintage</button>
-    </div>
+        <div class="filter-section">
+            <div class="filter-section-header">
+                <span class="section-title">Filters</span>
+                <div class="intensity-bar">
+                    <label for="intensity">Strength</label>
+                    <input type="range" id="intensity" min="0" max="2" step="0.05" value="1" aria-label="Filter intensity">
+                    <span id="intensity-value">100%</span>
+                </div>
+            </div>
 
-    <canvas id="canvas" hidden></canvas>
-    <div id="status"></div>
-    <div id="gallery"></div>
+            <div id="filter-tabs" role="tablist" aria-label="Filter categories">
+                <button class="tab-btn active" data-tab="basic" role="tab" aria-selected="true">Basic</button>
+                <button class="tab-btn" data-tab="creative" role="tab" aria-selected="false">Creative</button>
+                <button class="tab-btn" data-tab="cinematic" role="tab" aria-selected="false">Cinematic</button>
+                <button class="tab-btn" data-tab="special" role="tab" aria-selected="false">Special &#x2728;</button>
+            </div>
+
+            <div id="filter-panels">
+                <!-- Basic -->
+                <div class="filter-panel active" data-panel="basic" role="tabpanel">
+                    <button class="filter-btn active" data-filter="none">None</button>
+                    <button class="filter-btn" data-filter="brightness">Brightness</button>
+                    <button class="filter-btn" data-filter="contrast">Contrast</button>
+                    <button class="filter-btn" data-filter="blur">Blur</button>
+                    <button class="filter-btn" data-filter="sepia">Sepia</button>
+                    <button class="filter-btn" data-filter="grayscale">Grayscale</button>
+                    <button class="filter-btn" data-filter="hue-rotate">Hue Rotate</button>
+                    <button class="filter-btn" data-filter="saturate">Saturate</button>
+                    <button class="filter-btn" data-filter="invert">Invert</button>
+                    <button class="filter-btn" data-filter="portrait">Portrait</button>
+                    <button class="filter-btn" data-filter="soft-light">Soft Light</button>
+                    <button class="filter-btn" data-filter="hdr">HDR</button>
+                    <button class="filter-btn" data-filter="pastel">Pastel</button>
+                    <button class="filter-btn" data-filter="deep-fry">Deep Fry</button>
+                </div>
+
+                <!-- Creative -->
+                <div class="filter-panel" data-panel="creative" role="tabpanel">
+                    <button class="filter-btn" data-filter="warm">Warm</button>
+                    <button class="filter-btn" data-filter="cool">Cool</button>
+                    <button class="filter-btn" data-filter="warmth">Warmth</button>
+                    <button class="filter-btn" data-filter="glow">Glow</button>
+                    <button class="filter-btn" data-filter="golden-hour">Golden Hour</button>
+                    <button class="filter-btn" data-filter="summer">Summer</button>
+                    <button class="filter-btn" data-filter="autumn">Autumn</button>
+                    <button class="filter-btn" data-filter="arctic">Arctic</button>
+                    <button class="filter-btn" data-filter="faded">Faded</button>
+                    <button class="filter-btn" data-filter="matte">Matte</button>
+                    <button class="filter-btn" data-filter="lofi">Lo-Fi</button>
+                    <button class="filter-btn" data-filter="anime">Anime</button>
+                    <button class="filter-btn" data-filter="lark">Lark</button>
+                    <button class="filter-btn" data-filter="moon">Moon</button>
+                    <button class="filter-btn" data-filter="gingham">Gingham</button>
+                </div>
+
+                <!-- Cinematic -->
+                <div class="filter-panel" data-panel="cinematic" role="tabpanel">
+                    <button class="filter-btn" data-filter="vintage">Vintage</button>
+                    <button class="filter-btn" data-filter="drama">Drama</button>
+                    <button class="filter-btn" data-filter="cinematic">Cinematic</button>
+                    <button class="filter-btn" data-filter="pop">Pop</button>
+                    <button class="filter-btn" data-filter="mono">Mono</button>
+                    <button class="filter-btn" data-filter="cold">Cold</button>
+                    <button class="filter-btn" data-filter="clarendon">Clarendon</button>
+                    <button class="filter-btn" data-filter="maven">Maven</button>
+                    <button class="filter-btn" data-filter="kodachrome">Kodachrome</button>
+                    <button class="filter-btn" data-filter="fuji">Fuji</button>
+                    <button class="filter-btn" data-filter="noir">Noir</button>
+                    <button class="filter-btn" data-filter="bleach">Bleach</button>
+                    <button class="filter-btn" data-filter="cross-process">Cross Process</button>
+                    <button class="filter-btn" data-filter="teal-orange">Teal &amp; Orange</button>
+                </div>
+
+                <!-- Special -->
+                <div class="filter-panel" data-panel="special" role="tabpanel">
+                    <button class="filter-btn" data-filter="sparkle">&#x2728; Sparkle</button>
+                    <button class="filter-btn" data-filter="neon">&#x1F506; Neon</button>
+                    <button class="filter-btn" data-filter="glitch">&#x1F4FA; Glitch</button>
+                    <button class="filter-btn" data-filter="vhs">&#x1F4FC; VHS</button>
+                    <button class="filter-btn" data-filter="rainbow">&#x1F308; Rainbow</button>
+                    <button class="filter-btn" data-filter="duotone">&#x1F3A8; Duotone</button>
+                    <button class="filter-btn" data-filter="night-vision">&#x1F319; Night Vision</button>
+                    <button class="filter-btn" data-filter="thermal">&#x1F321; Thermal</button>
+                    <button class="filter-btn" data-filter="pixelate">&#x1F532; Pixelate</button>
+                    <button class="filter-btn" data-filter="pencil">&#x270F;&#xFE0F; Pencil</button>
+                    <button class="filter-btn" data-filter="hue-cycle">&#x1F300; Hue Cycle</button>
+                    <button class="filter-btn" data-filter="pulse">&#x1F4AB; Pulse</button>
+                    <button class="filter-btn" data-filter="chromatic">&#x1F534; Chromatic</button>
+                    <button class="filter-btn" data-filter="matrix">&#x1F4BB; Matrix</button>
+                    <button class="filter-btn" data-filter="fire">&#x1F525; Fire</button>
+                    <button class="filter-btn" data-filter="aurora">&#x1F30C; Aurora</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="transforms">
+            <span class="section-title">Angle / Effects</span>
+            <button class="transform-btn active" data-transform="none">Normal</button>
+            <button class="transform-btn" data-transform="rotateLeft">&#x21BA; Rotate Left</button>
+            <button class="transform-btn" data-transform="rotateRight">&#x21BB; Rotate Right</button>
+            <button class="transform-btn" data-transform="flip">&#x2194; Flip</button>
+            <button class="transform-btn" data-transform="skew">&#x27CB; Skew</button>
+        </div>
+
+        <canvas id="canvas" hidden></canvas>
+        <div id="status" role="status" aria-live="polite"></div>
+        <div id="gallery" aria-label="Media gallery"></div>
+    </div>
 
     <script src="index.js"></script>
 </body>
